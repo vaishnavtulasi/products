@@ -22,9 +22,8 @@ Route::group(['namespace' => 'Auth' ], function (){
 
         Route::get('verify/{approveId}','RegisterController@verifyUser')->name('approve');
 
-        Route::get('login' , 'LoginController@create')->name('login');
-
-        Route::post('login/checkUser' , 'LoginController@checkUser')->name('checkuser');
+        Route::get('login' , 'LoginController@login')->name('login');
+        Route::post('login' , 'LoginController@postLogin')->name('checkuser');
 
    });
 

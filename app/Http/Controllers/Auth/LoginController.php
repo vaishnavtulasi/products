@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use App\User;
+
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\loginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -33,22 +30,12 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-       //$this->middleware('guest')->except('logout');
-    }
-
-    public function create()
+    public function login()
     {
         return view('login');
     }
 
-    public function checkUser(loginRequest $req)
+    public function postLogin(loginRequest $req)
     {
 
         if(Auth::guard('web')->attempt(['email' => $req->email , 'password' => $req->password]))
@@ -59,9 +46,10 @@ class LoginController extends Controller
         return redirect()->route('login');
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
+
         return redirect()->route('login');
     }
 }
